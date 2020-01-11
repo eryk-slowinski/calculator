@@ -1,0 +1,60 @@
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #777;
+      font-family: arial;
+  }
+
+  body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      padding: 100px;
+  }
+
+  .screen {
+      flex-basis: 15%;
+      background-color: #ddd;
+      font-size: 65px;
+      text-align: right;
+  }
+
+  .operation {
+      background-color: #ddd;
+      height: 50%;
+      font-size: 22px;
+  }
+
+  .result {
+      background-color: #ddd;
+      font-size: 44px;
+  }
+
+  .keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+  }
+
+  .keyboard button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      flex-basis: 30%;
+      border: 2px solid white;
+      font-family: arial;
+      font-size: 50px;
+      box-sizing: border-box;
+  }
+
+  .highlighted {
+      background-color: #555;
+  }
+
+  button:active {
+      background-color: #3a3a3a;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+  }
