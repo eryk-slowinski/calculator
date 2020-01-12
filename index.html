@@ -32,83 +32,8 @@
         <button data-action="multiply">*</button>
         <button data-action="delete-all">C</button>
         <button data-action="calculate">=</button>
-        <script>
-            const operation = document.querySelector('.operation');
-            const display = document.querySelector('.result');
-            const keyboard = document.querySelector('.keyboard');
-
-            keyboard.addEventListener('click', function (event) {
-                if (event.target.tagName === 'BUTTON') {
-                    const arr = Array.from(event.target.parentNode.children);
-                    arr.forEach(button => button.classList.remove('highlighted'));
-
-                    const action = event.target.dataset.action;
-                    const buttonValue = event.target.textContent;
-                    const displayedNumber = display.textContent;
-
-                    if (!action) {
-                        if (displayedNumber === '0' || keyboard.dataset.recentKeyType === 'operator') {
-                            display.textContent = buttonValue;
-                        } else {
-                            display.textContent = displayedNumber + buttonValue;
-                        }
-                        keyboard.dataset.recentKeyType = 'number';
-                    }
-
-                    if (action === 'decimal-point') {
-                        if (!displayedNumber.includes('.')) display.textContent = displayedNumber + '.';
-                        if (keyboard.dataset.recentKeyType === 'operator') display.textContent = '0.';
-                        keyboard.dataset.recentKeyType = 'decimal-point';
-                    }
-
-                    if (action === 'delete-all') {
-                        keyboard.dataset.recentKeyType = 'delete-all';
-                        display.textContent = '';
-                    }
-
-                    if (action === 'add' ||
-                        action === 'subtract' ||
-                        action === 'divide' ||
-                        action === 'multiply') {
-                        const firstArgument = parseFloat(operation.dataset.firstArgument);
-                        const secondArgument = parseFloat(displayedNumber);
-                        const operator = operation.dataset.operator;
-                        if (firstArgument && operator) {
-                            display.textContent = calculate(firstArgument, secondArgument, operator);
-                        }
-
-
-                        event.target.classList.add('highlighted');
-                        keyboard.dataset.recentKeyType = 'operator';
-                        operation.dataset.firstArgument = displayedNumber;
-                        operation.dataset.operator = action;
-                        // display.textContent = '';
-                    }
-
-                    if (action === 'calculate') {
-                        keyboard.dataset.recentKeyType = 'calculate';
-                        const firstArgument = parseFloat(operation.dataset.firstArgument);
-                        const secondArgument = parseFloat(displayedNumber);
-                        const operator = operation.dataset.operator;
-                        display.textContent = calculate(firstArgument, secondArgument, operator);
-                    }
-                }
-            })
-
-            const calculate = (a, b, operation) => {
-                let result;
-                if (operation === 'add') {
-                    result = a + b;
-                } else if (operation === 'subtract') {
-                    result = a - b;
-                } else if (operation === 'multiply') {
-                    result = a * b;
-                } else if (operation === 'divide') {
-                    result = a / b;
-                }
-                return result;
-            }
-        </script>
+    </div>
+    <script src="main.js"></script>
 </body>
 
 </html>
