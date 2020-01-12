@@ -14,21 +14,14 @@
   }
 
   .screen {
-      flex-basis: 15%;
+      flex-basis: 13%;
       background-color: #ddd;
-      font-size: 65px;
       text-align: right;
-  }
-
-  .operation {
-      background-color: #ddd;
-      height: 50%;
-      font-size: 22px;
   }
 
   .result {
       background-color: #ddd;
-      font-size: 44px;
+      font-size: 64px;
   }
 
   .keyboard {

@@ -1,4 +1,3 @@
-conskeyboardon = document.querySelector('.operation');
 const display = document.querySelector('.result');
 const keyboard = document.querySelector('.keyboard');
 
@@ -31,7 +30,7 @@ keyboard.addEventListener('click', function (event) {
             keyboard.dataset.firstArgument = '';
             keyboard.dataset.operator = '';
             keyboard.dataset.modifierValue = '';
-            display.textContent = '';
+            display.textContent = '0';
         }
 
         if (action === 'add' ||
