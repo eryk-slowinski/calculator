@@ -3,15 +3,19 @@ const keyboard = document.querySelector('.keyboard');
 
 keyboard.addEventListener('click', function (event) {
     if (event.target.tagName === 'BUTTON') {
+        const keyType = getKeyType(event.target);
         const arr = Array.from(event.target.parentNode.children);
         arr.forEach(button => button.classList.remove('highlighted'));
 
         const buttonValue = event.target.textContent;
         const displayedNumber = display.textContent;
         const action = event.target.dataset.action;
+        const recentKeyType = keyboard.dataset.recentKeyType;
 
-        if (!action) {
-            if (displayedNumber === '0' || keyboard.dataset.recentKeyType === 'operator' || keyboard.dataset.recentKeyType === 'calculate') {
+        if (keyType === 'number') {
+            if (displayedNumber === '0' ||
+                recentKeyType === 'operator' ||
+                recentKeyType === 'calculate') {
                 display.textContent = buttonValue;
             } else {
                 display.textContent = displayedNumber + buttonValue;
@@ -19,13 +23,13 @@ keyboard.addEventListener('click', function (event) {
             keyboard.dataset.recentKeyType = 'number';
         }
 
-        if (action === 'decimal-point') {
+        if (keyType === 'decimal-point') {
             if (!displayedNumber.includes('.')) display.textContent = displayedNumber + '.';
-            if (keyboard.dataset.recentKeyType === 'operator' || keyboard.dataset.recentKeyType === 'calculate') display.textContent = '0.';
+            if (recentKeyType === 'operator' || recentKeyType === 'calculate') display.textContent = '0.';
             keyboard.dataset.recentKeyType = 'decimal-point';
         }
 
-        if (action === 'delete-all') {
+        if (keyType === 'delete-all') {
             keyboard.dataset.recentKeyType = '';
             keyboard.dataset.firstArgument = '';
             keyboard.dataset.operator = '';
@@ -33,14 +37,11 @@ keyboard.addEventListener('click', function (event) {
             display.textContent = '0';
         }
 
-        if (action === 'add' ||
-            action === 'subtract' ||
-            action === 'divide' ||
-            action === 'multiply') {
+        if (keyType === 'operator') {
             const firstArgument = keyboard.dataset.firstArgument;
             const secondArgument = displayedNumber;
             const operator = keyboard.dataset.operator;
-            if (firstArgument && operator && keyboard.dataset.recentKeyType !== 'operator' && keyboard.dataset.recentKeyType !== 'calculate') {
+            if (firstArgument && operator && recentKeyType !== 'operator' && recentKeyType !== 'calculate') {
                 const calculatedValue = calculate(firstArgument, secondArgument, operator);
                 display.textContent = calculatedValue;
                 keyboard.dataset.firstArgument = calculatedValue;
@@ -53,12 +54,12 @@ keyboard.addEventListener('click', function (event) {
             keyboard.dataset.operator = action;
         }
 
-        if (action === 'calculate') {
+        if (keyType === 'calculate') {
             let firstArgument = keyboard.dataset.firstArgument;
             let secondArgument = displayedNumber;
             const operator = keyboard.dataset.operator;
             if (firstArgument) {
-                if (keyboard.dataset.recentKeyType === 'calculate') {
+                if (recentKeyType === 'calculate') {
                     firstArgument = displayedNumber;
                     secondArgument = keyboard.dataset.modifierValue;
                 }
@@ -77,4 +78,11 @@ const calculate = (a, b, operation) => {
     if (operation === 'subtract') return x - y;
     if (operation === 'multiply') return x * y;
     if (operation === 'divide') return x / y;
+}
+
+const getKeyType = (key) => {
+    const action = key.dataset.action;
+    if (!action) return 'number';
+    if (action === 'add' || action === 'subtract' || action === 'multiply' || action === 'divide') return 'operator';
+    return action;
 }

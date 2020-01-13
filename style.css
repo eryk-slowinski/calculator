@@ -1,53 +1,64 @@
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      background-color: #777;
-      font-family: arial;
-  }
+@import url('https://fonts.googleapis.com/css?family=Orbitron:400,600&display=swap');
 
-  body {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      padding: 100px;
-  }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
 
-  .screen {
-      flex-basis: 13%;
-      background-color: #ddd;
-      text-align: right;
-  }
+.background {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to right, #a9b1c7, #d6a4a4);
+}
 
-  .result {
-      background-color: #ddd;
-      font-size: 64px;
-  }
+.wrap {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100vh;
+    width: 50vw;
+}
 
-  .keyboard {
-      display: flex;
-      flex-wrap: wrap;
-      flex-grow: 1;
-  }
+.screen {
+    flex-basis: 10%;
+    background-color: #ddd;
+    text-align: right;
+    font-weight: bold;
+    border: 3px solid rgb(133, 107, 107);
+}
 
-  .keyboard button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-grow: 1;
-      flex-basis: 30%;
-      border: 2px solid white;
-      font-family: arial;
-      font-size: 50px;
-      box-sizing: border-box;
-  }
+.result {
+    background-color: #ddd;
+    font-size: 64px;
+}
 
-  .highlighted {
-      background-color: #555;
-  }
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    border: 2px solid rgb(102, 100, 100);
+}
 
-  button:active {
-      background-color: #3a3a3a;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-  }
+.keyboard button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-basis: 30%;
+    border: 1px solid rgb(160, 144, 144);
+    font-size: 50px;
+    box-sizing: border-box;
+}
+
+.highlighted {
+    background-color: #555;
+}
+
+button:active {
+    background-color: #3a3a3a;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
